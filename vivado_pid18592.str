@@ -1,0 +1,96 @@
+/*
+
+Xilinx Vivado v2018.2 (64-bit) [Major: 2018, Minor: 2]
+SW Build: 2258646 on Thu Jun 14 20:03:12 MDT 2018
+IP Build: 2256618 on Thu Jun 14 22:10:49 MDT 2018
+
+Process ID: 18592
+License: Customer
+
+Current time: 	Sun Dec 02 22:03:00 PST 2018
+Time zone: 	Pacific Standard Time (America/Los_Angeles)
+
+OS: Windows 10
+OS Version: 10.0
+OS Architecture: amd64
+Available processors (cores): 4
+
+Screen size: 1366x768
+Screen resolution (DPI): 96
+Available screens: 1
+Available disk space: 271 GB
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+
+Java version: 	1.8.0_112 64-bit
+Java home: 	C:/Xilinx/Vivado/2018.2/tps/win64/jre
+Java executable location: 	C:/Xilinx/Vivado/2018.2/tps/win64/jre/bin/java.exe
+Java initial memory (-Xms): 	128 MB
+Java maximum memory (-Xmx):	 2 GB
+
+
+User name: 	SANIKA
+User home directory: C:/Users/SANIKA
+User working directory: C:/Users/SANIKA/Documents/ECE540Fall18/FinalProject/RGB_AHBlite/RGB/RGB/Hardware
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+RDI_BASEROOT: C:/Xilinx/Vivado
+HDI_APPROOT: C:/Xilinx/Vivado/2018.2
+RDI_DATADIR: C:/Xilinx/Vivado/2018.2/data
+RDI_BINDIR: C:/Xilinx/Vivado/2018.2/bin
+
+Vivado preferences file location: C:/Users/SANIKA/AppData/Roaming/Xilinx/Vivado/2018.2/vivado.xml
+Vivado preferences directory: C:/Users/SANIKA/AppData/Roaming/Xilinx/Vivado/2018.2/
+Vivado layouts directory: C:/Users/SANIKA/AppData/Roaming/Xilinx/Vivado/2018.2/layouts
+PlanAhead jar file location: 	C:/Xilinx/Vivado/2018.2/lib/classes/planAhead.jar
+Vivado log file location: 	C:/Users/SANIKA/Documents/ECE540Fall18/FinalProject/RGB_AHBlite/RGB/RGB/Hardware/vivado.log
+Vivado journal file location: 	C:/Users/SANIKA/Documents/ECE540Fall18/FinalProject/RGB_AHBlite/RGB/RGB/Hardware/vivado.jou
+Engine tmp dir: 	C:/Users/SANIKA/Documents/ECE540Fall18/FinalProject/RGB_AHBlite/RGB/RGB/Hardware/.Xil/Vivado-18592-LAPTOP-OTN9HFOM
+
+Xilinx Environment Variables
+----------------------------
+XILINX: C:/Xilinx/Vivado/2018.2/ids_lite/ISE
+XILINX_DSP: C:/Xilinx/Vivado/2018.2/ids_lite/ISE
+XILINX_PLANAHEAD: C:/Xilinx/Vivado/2018.2
+XILINX_SDK: C:/Xilinx/SDK/2018.2
+XILINX_VIVADO: C:/Xilinx/Vivado/2018.2
+XILINX_VIVADO_HLS: C:/Xilinx/Vivado/2018.2
+
+
+GUI allocated memory:	201 MB
+GUI max memory:		3,052 MB
+Engine allocated memory: 520 MB
+
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// TclEventType: PROJECT_OPEN_DIALOG
+// bx (ck):  Open Project : addNotify
+// Opening Vivado Project: C:\Users\SANIKA\Documents\ECE540Fall18\FinalProject\RGB_AHBlite\RGB\RGB\Hardware\Balkawade_Cetola_proj1.xpr. Version: Vivado v2018.2 
+// [GUI Memory]: 50 MB (+50082kb) [00:00:07]
+// [Engine Memory]: 481 MB (+352479kb) [00:00:07]
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// TclEventType: MSGMGR_MOVEMSG
+// Tcl Message: open_project C:/Users/SANIKA/Documents/ECE540Fall18/FinalProject/RGB_AHBlite/RGB/RGB/Hardware/Balkawade_Cetola_proj1.xpr 
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_CURRENT
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 63 MB (+11259kb) [00:00:11]
+// [Engine Memory]: 546 MB (+43805kb) [00:00:11]
+// [Engine Memory]: 576 MB (+2486kb) [00:00:12]
+// [GUI Memory]: 80 MB (+14072kb) [00:00:12]
+// [Engine Memory]: 615 MB (+10009kb) [00:00:13]
+// [GUI Memory]: 85 MB (+614kb) [00:00:14]
+// Tcl Message: open_project C:/Users/SANIKA/Documents/ECE540Fall18/FinalProject/RGB_AHBlite/RGB/RGB/Hardware/Balkawade_Cetola_proj1.xpr 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2018.2/data/ip'. 
+// HMemoryUtils.trashcanNow. Engine heap size: 624 MB. GUI used memory: 47 MB. Current time: 12/2/18 10:03:07 PM PST
+// Tcl Message: open_project: Time (s): cpu = 00:00:17 ; elapsed = 00:00:08 . Memory (MB): peak = 886.391 ; gain = 158.453 
+// Project name: Balkawade_Cetola_proj1; location: C:/Users/SANIKA/Documents/ECE540Fall18/FinalProject/RGB_AHBlite/RGB/RGB/Hardware; part: xc7a100tcsg324-1
+dismissDialog("Open Project"); // bx (ck)

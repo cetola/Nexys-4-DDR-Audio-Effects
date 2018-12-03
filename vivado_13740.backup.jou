@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Sun Dec  2 22:14:46 2018
+# Process ID: 13740
+# Current directory: C:/Users/SANIKA/Documents/ECE540Fall18/FinalProject/RGB_AHBlite/RGB/RGB/Hardware
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent6424 C:\Users\SANIKA\Documents\ECE540Fall18\FinalProject\RGB_AHBlite\RGB\RGB\Hardware\Balkawade_Cetola_proj1.xpr
+# Log file: C:/Users/SANIKA/Documents/ECE540Fall18/FinalProject/RGB_AHBlite/RGB/RGB/Hardware/vivado.log
+# Journal file: C:/Users/SANIKA/Documents/ECE540Fall18/FinalProject/RGB_AHBlite/RGB/RGB/Hardware\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/SANIKA/Documents/ECE540Fall18/FinalProject/RGB_AHBlite/RGB/RGB/Hardware/Balkawade_Cetola_proj1.xpr
