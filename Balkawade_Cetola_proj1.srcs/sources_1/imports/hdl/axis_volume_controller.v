@@ -11,7 +11,7 @@
 //              master interface. Reception of data on the slave interface is halted while processing and
 //              transfer is taking place.
 //              SC:
-//              Added debounce.
+//              Added debounce. Adding amplitude LED effect. Yes, it is a mess, but it works.
 // 
 // Revision:
 // Revision 0.01 - File Created
@@ -25,6 +25,7 @@ module axis_volume_controller #(
 ) (
     input wire clk,
     input wire [SWITCH_WIDTH-1:0] sw,
+    output wire [15:0] LED,
     
     //AXIS SLAVE INTERFACE
     input  wire [DATA_WIDTH-1:0] s_axis_data,
@@ -51,6 +52,12 @@ module axis_volume_controller #(
     wire s_new_word = (s_axis_valid == 1'b1 && s_axis_ready == 1'b1) ? 1'b1 : 1'b0;
     wire s_new_packet = (s_new_word == 1'b1 && s_axis_last == 1'b1) ? 1'b1 : 1'b0;
     reg s_new_packet_r = 1'b0;
+    
+    reg[15:0] led_io = 1'b1;
+    wire signed [23:0] less_data;
+    
+    assign LED = led_io;
+    assign less_data = $signed(m_axis_data);    
     
     always@(posedge clk) begin        //TODO: OMG, seriously, it's gross.
         multiplier <= {sw,{MULTIPLIER_WIDTH{1'b0}}} / {SWITCH_WIDTH{1'b1}};
@@ -82,6 +89,40 @@ module axis_volume_controller #(
             m_axis_data = data[m_select][MULTIPLIER_WIDTH+DATA_WIDTH-1:MULTIPLIER_WIDTH];
         else
             m_axis_data = m_axis_data;
+            
+    always@(posedge clk)
+        if (less_data > 14300000)
+            led_io = 16'hffff;
+        else if (less_data > 13300000)
+            led_io = 16'h7fff;
+        else if (less_data > 1230000)
+            led_io = 16'h3fff;
+        else if (less_data > 1130000)
+            led_io = 16'h1fff;
+        else if (less_data > 1030000)
+            led_io = 16'hfff;
+        else if (less_data > 930000)
+            led_io = 16'h7ff;
+        else if (less_data > 830000)
+            led_io = 16'h3ff;
+        else if (less_data > 730000)
+            led_io = 16'h1ff;
+        else if (less_data > 630000)
+            led_io = 16'hff;
+        else if (less_data > 530000)
+            led_io = 16'h7f;
+        else if (less_data > 430000)
+            led_io = 16'h3f;
+        else if (less_data > 330000)
+            led_io = 16'h1f;
+        else if (less_data > 230000)
+            led_io = 16'hf;
+        else if (less_data > 130000)
+            led_io = 16'h7;
+        else if (less_data > 10000)
+            led_io = 16'h3;
+        else
+            led_io = 16'b1;
             
     always@(posedge clk)
         if (s_new_packet == 1'b1)

@@ -96,7 +96,7 @@ module mfp_nexys4_ddr(
                     .EJ_DINT(1'b0),
                     .IO_Switch(sw_db),
                     .IO_PB(btn_db[4:0]),
-                    .IO_LED(LED),
+                    .IO_LED(),
                     .IO_7SEGEN_N(AN),
                     .IO_7SEG_N({DP,CA,CB,CC,CD,CE,CF,CG}), 
                     .IO_RGB_DATA(IO_RGB_DATA),
@@ -143,7 +143,8 @@ module mfp_nexys4_ddr(
                         .m_axis_data(volume_data),
                         .m_axis_valid(axis_tx_valid),
                         .m_axis_ready(axis_tx_ready),
-                        .m_axis_last(axis_tx_last)
+                        .m_axis_last(axis_tx_last),
+                        .LED(LED)
                     );
                     
                         distortion #(
