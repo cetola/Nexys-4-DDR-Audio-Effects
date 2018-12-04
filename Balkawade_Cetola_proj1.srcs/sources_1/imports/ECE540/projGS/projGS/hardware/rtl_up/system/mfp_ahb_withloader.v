@@ -39,6 +39,7 @@ module mfp_ahb_withloader (
 
 	// memory-mapped I/O
     input      [`MFP_N_SW-1 : 0] IO_Switch,
+    input      [`MFP_N_AMP-1  :0] IO_AMP,
     input      [`MFP_N_PB-1 : 0] IO_PB,
     output     [`MFP_N_LED-1: 0] IO_LED,
     output     [ 7          : 0] IO_7SEGEN_N,
@@ -145,6 +146,7 @@ module mfp_ahb_withloader (
         .SI_Endian        ( SI_Endian       ),
                                              
         .IO_Switch        ( IO_Switch       ),
+        .IO_AMP           ( IO_AMP          ),
         .IO_PB            ( IO_PB           ),
         .IO_LED           ( IO_LED          ),
         .IO_7SEGEN_N      ( IO_7SEGEN_N     ),

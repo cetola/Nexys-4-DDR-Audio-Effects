@@ -9,6 +9,7 @@
 //---------------------------------------------------
 `define MFP_N_LED             16
 `define MFP_N_SW              16
+`define MFP_N_AMP             16
 `define MFP_N_PB              5
 `define MFP_N_RGB_DATA        6
 `define MFP_N_RGB_CTRL        6  
@@ -23,10 +24,12 @@
 `define H_LED_ADDR    			(32'h1f800000)
 `define H_SW_ADDR   			(32'h1f800004)
 `define H_PB_ADDR   			(32'h1f800008)
+`define H_AMP_ADDR   			(32'h1f80000c)
 
 `define H_LED_IONUM   			(4'h0)
 `define H_SW_IONUM  			(4'h1)
 `define H_PB_IONUM  			(4'h2)
+`define H_AMP_IONUM  			(4'h2)
 
 //---------------------------------------------------
 // Memory-mapped 7 SEG Addr

@@ -58,6 +58,7 @@ module mfp_nexys4_ddr(
   
   wire [5:0] btn_db;
   wire [15:0] sw_db;
+  wire [15:0] amp;
   
   wire [23:0] axis_tx_data;
   wire axis_tx_valid;
@@ -95,6 +96,7 @@ module mfp_nexys4_ddr(
                     .SI_ColdReset_N(JB[8]),
                     .EJ_DINT(1'b0),
                     .IO_Switch(sw_db),
+                    .IO_AMP(amp),
                     .IO_PB(btn_db[4:0]),
                     .IO_LED(),
                     .IO_7SEGEN_N(AN),
@@ -134,7 +136,7 @@ module mfp_nexys4_ddr(
                     ) m_vc (
                         .clk(axis_clk),
                         .sw(sw_db),
-                        
+                        .amp(amp),
                         .s_axis_data(axis_rx_data),
                         .s_axis_valid(axis_rx_valid),
                         .s_axis_ready(axis_rx_ready),

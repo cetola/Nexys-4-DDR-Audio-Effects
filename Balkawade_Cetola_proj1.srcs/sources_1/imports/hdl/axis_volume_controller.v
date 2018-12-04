@@ -26,6 +26,7 @@ module axis_volume_controller #(
     input wire clk,
     input wire [SWITCH_WIDTH-1:0] sw,
     output wire [15:0] LED,
+    output wire [15:0] amp,
     
     //AXIS SLAVE INTERFACE
     input  wire [DATA_WIDTH-1:0] s_axis_data,
@@ -57,6 +58,7 @@ module axis_volume_controller #(
     wire signed [23:0] less_data;
     
     assign LED = led_io;
+    assign amp = led_io;
     assign less_data = $signed(m_axis_data);    
     
     always@(posedge clk) begin        //TODO: OMG, seriously, it's gross.

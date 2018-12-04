@@ -28,6 +28,7 @@ module mfp_ahb(
 
 // memory-mapped I/O
     input      [`MFP_N_SW-1 :0] IO_Switch,
+    input      [`MFP_N_AMP-1  :0] IO_AMP,
     input      [`MFP_N_PB-1 :0] IO_PB,
     output     [`MFP_N_LED-1:0] IO_LED,
     output     [ 7          :0] IO_7SEGEN_N,
@@ -56,7 +57,7 @@ module mfp_ahb(
                               HTRANS, HWDATA, HWRITE, HRDATA1, HSEL[1]);
   // Module 2 - GPIO
   mfp_ahb_gpio mfp_ahb_gpio(HCLK, HRESETn, HADDR[5:2], HTRANS, HWDATA, HWRITE, HSEL[2], 
-                            HRDATA2, IO_Switch, IO_PB, IO_LED);
+                            HRDATA2, IO_Switch, IO_AMP, IO_PB, IO_LED);
   // Module 3 - 7 SEG
   mfp_ahb_7seg mfp_ahb_7seg(HCLK, HRESETn, HADDR, HTRANS, HWDATA, HWRITE, HSEL[3], 
                             HRDATA3, IO_7SEGEN_N, IO_7SEG_N);
