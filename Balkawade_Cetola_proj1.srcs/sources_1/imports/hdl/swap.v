@@ -32,9 +32,9 @@ module swap #(
 
     always@(posedge clk) begin
         if (swap_sw && rx_data[DATA_WIDTH-1] === 1'b1)
-            tx_data <= {1, rx_data[15:0], rx_data[22:16]};
+            tx_data <= {1'b1, rx_data[15:0], rx_data[22:16]};
         else if(swap_sw)
-            tx_data <= {0, rx_data[15:0], rx_data[22:16]};
+            tx_data <= {0'b0, rx_data[15:0], rx_data[22:16]};
         else
             tx_data <= rx_data;
     end
