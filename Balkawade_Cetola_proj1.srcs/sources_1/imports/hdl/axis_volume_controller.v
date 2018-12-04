@@ -93,9 +93,9 @@ module axis_volume_controller #(
             m_axis_data = m_axis_data;
             
     always@(posedge clk)
-        if (less_data > 14300000)
+        if (less_data > 1430000)
             led_io = 16'hffff;
-        else if (less_data > 13300000)
+        else if (less_data > 1330000)
             led_io = 16'h7fff;
         else if (less_data > 1230000)
             led_io = 16'h3fff;
