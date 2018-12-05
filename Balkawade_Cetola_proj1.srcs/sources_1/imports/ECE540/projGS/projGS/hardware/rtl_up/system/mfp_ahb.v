@@ -39,8 +39,8 @@ module mfp_ahb(
 
 
   wire [31:0] HRDATA4, HRDATA3, HRDATA2, HRDATA1, HRDATA0;
-  wire [ 3:0] HSEL;
-  reg  [ 3:0] HSEL_d;
+  wire [ 4:0] HSEL;
+  reg  [ 4:0] HSEL_d;
 
   assign HREADY = 1;
   assign HRESP = 0;
@@ -75,7 +75,7 @@ endmodule
 module ahb_decoder
 (
     input  [31:0] HADDR,
-    output [ 3:0] HSEL
+    output [ 4:0] HSEL
 );
 
   // Decode based on bits 28-22 of the address
@@ -90,7 +90,7 @@ endmodule
 module ahb_mux
 (
     input             HCLK,
-    input      [ 2:0] HSEL,
+    input      [ 4:0] HSEL,
     input      [31:0] HRDATA4, HRDATA3, HRDATA2, HRDATA1, HRDATA0,
     output reg [31:0] HRDATA
 );
