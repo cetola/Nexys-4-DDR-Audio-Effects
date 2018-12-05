@@ -26,11 +26,18 @@
  *									DP3 = bit[3], DP2 = bit[2], DP1 = bit[1], DP0 = bit[0]
  *
  * The RGB LED peripheral has 4 memory mapped I/O registers:
- * 
  *
+ * PORT_RGB1_DATA = (24 bits)  Value for 8 bit PWM input for R,G,B channel for LED1
+ *							    RED_DC = bits[23:16], GREEN_DC = bits[15:8], BLUE_DC = bits[7:0]
  *
+ * PORT_RGB2_DATA = (24 bits)  Value for 8 bit PWM input for R,G,B channel for LED2
+ *							    RED_DC = bits[23:16], GREEN_DC = bits[15:8], BLUE_DC = bits[7:0]
  *
+ * PORT_RGB1_CTRL = (3 bits)   Value for PWM enable input for R, G, B signals of LED1
+ *							   Red_EN = bit[2], Green_EN = bit[1], Blue_EN = bit[0]
  *
+ * PORT_RGB2_CTRL = (3 bits)   Value for PWM enable input for R, G, B signals of LED2
+ *							   Red_EN = bit[2], Green_EN = bit[1], Blue_EN = bit[0]
  *
  */
 
@@ -40,10 +47,12 @@ PORT_SEVENSEG_LOW	= 0xbf700008		# (o) 7 Segment Lower Display
 PORT_SEVENSEG_DP	= 0xbf70000C		# (o) 7 segment Decimal Point Display
 PORT_PUSH_BUTTON 	= 0xbf800008		# (o) Push buttons
 PORT_SLIDE_SW		= 0xbf800004		# (i) Slide switch
+
 PORT_RGB1_DATA		= 0xbf900000		#  DATA register for RGB LED1
 PORT_RGB1_CTRL		= 0xbf900004		#  Control register for RGB LED1
 PORT_RGB2_DATA		= 0xbf900008		#  DATA register for RGB LED2
 PORT_RGB2_CTRL		= 0xbf90000C		#  Control register for RGB LED2
+
 PORT_AMP			= 0xbf80000C		#  Audio out amplitude signal
 
 sw_distort1			= 0x00008000		# bit 15
@@ -55,16 +64,13 @@ FiveHz				= 0x249F00			# 5 Hz = 10*10^6 cycles / 25 instructions * 6 segments
 TenHz				= 0x124F80			# 2x faster than FiveHz
 OneHz				= 0x6CFDC9			# 1 Hz = 50*10^6 cycles / 7 (14 instructions per segment / 2 for blinking)
 
-
+.text
 .globl main
 main:
     lui   $t4, 0xbf80    				# $t4 = address of LEDs (0xbf800000)
     addiu $s3, $t4, 8    				# $s3 = address of push buttons (0xbf800008)
-    li    $t6, PORT_SEVENSEG_EN			# $t6 = address of the 7 segment enable
-    li 	  $t7, PORT_SEVENSEG_HGH		# $t7 = address of the higher 7 segment digits
-    li 	  $s0, PORT_SEVENSEG_LOW		# $s0 = address of the lower 7 segment digits
-    li 	  $s1, PORT_SEVENSEG_DP			# $s1 = address of the dp points in 7 segment digits
-
+    lui   $t5, 0xbf90					# $t5 = address of RGB data1
+    addiu $t6, $t5, 8					# $t6 = address of RGB data2
 
 
 # ######################################################################################################################
@@ -75,7 +81,7 @@ main:
 init:
 	#enable seven segment digits - 7 to 0 (Active low)
 	li    $t3, 0x00						# Enable all 7 segment digits
-    sw    $t3, 0($t6)                   # $t6 = address of seven segment enable
+    sw    $t3, PORT_SEVENSEG_EN($0)
 
     li    $t3, 0xff						#turn off decimal points
     sw    $t3, PORT_SEVENSEG_DP($0)
@@ -84,15 +90,20 @@ init:
 	li    $t7, 0x1f1f1f1f				# clear 7 seg display
 	sw    $t7, PORT_SEVENSEG_HGH($0)
 	sw    $t7, PORT_SEVENSEG_LOW($0)
+
 	# Turn OFF all LEDs
 	sw    $0,  0($t4)					# $t4 - Address of LED register
 
-	#Turn OFF RGB LEDS
-	sw    $0,  PORT_RGB1_DATA($0)		# clear RGB LED1 pwm data
-	sw    $0,  PORT_RGB2_DATA($0)		# clear RGB LED1 pwm data
-	li    $t1, 0x0000007		     	# valule to be loaded in RGB control register to enable PWM
+	#Turn ON RGB LEDS
+	li    $t1, 0x7		     			# valule to be loaded in RGB control register to enable PWM (3'b111)
 	sw    $t1, PORT_RGB1_CTRL($0)		# enable RGB LED1 PWM
 	sw    $t1, PORT_RGB2_CTRL($0)		# enable RGB LED2 PWM
+	li    $t1, 255
+	sw    $t1, PORT_RGB1_DATA($0)
+	sw    $t1, PORT_RGB1_DATA($0)
+
+
+
 
 
 
@@ -126,14 +137,30 @@ L1:  li   $t7, 0x1f1f1f1f					# clear 7 seg display
 	sw    $t7, PORT_SEVENSEG_HGH($0)
 	sw    $t7, PORT_SEVENSEG_LOW($0)
 
-	//jal   distor1
+/*
+RGB:
+	// Read amplitude of signal
+	lw    $s2, PORT_AMP($0)				# load current amplitude from memory location
 
-	//jal   distor2
+	// Check if the amplitude is less than 255, if yes, then load to Green and Blue registers,
+	// else load to Red_Green register
 
-	//jal chorus
+	//SLTIU Set on Less Than Immediate Unsigned
+	// set $t1 if amplitude < 255
+	SLTIU  $t1, $s2, 255
+	beq    $t1, $0, setGB
+	sll    $t2, $s2, 8									// i.e. $t1 is not set, dump the amplitude to Red-Green
+	sw     $t2, PORT_RGB1_DATA($0)		# RGB LED1 pwm data
+	sw     $t2,  PORT_RGB2_DATA($0)		# RGB LED2 pwm data
+
+setGB:													// $t1 is set, ie. amplitude < 255
+	sw     $s2, PORT_RGB1_DATA($0)		# RGB LED1 pwm data
+	sw     $s2,  PORT_RGB2_DATA($0)		# RGB LED2 pwm data
+
+
+*/
 
 	j     readIO
-
 
 
 distor1:
